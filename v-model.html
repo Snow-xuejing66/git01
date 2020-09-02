@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <input type="radio" value="男" v-model="isStr">男
+        <input type="radio" value="女" v-model="isStr">女{{isStr}}
+    </div>
+    <script src='https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js'></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                isStr: "空"
+            },
+            methods: {
+            },
+        })
+    </script>
+</body>
+
+</html>

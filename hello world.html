@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <style>
+        /* v-cloak 防止页面闪烁 */
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id='app'>
+        <div v-cloak>{{msg}}</div>
+        <div v-text="msg"></div>
+        <div v-text="msg1"></div>
+        <div v-html="msg1"></div>
+        <!-- v-pre 保留预格式 包括原始的{{}} 插值表达式  -->
+        <div v-pre>{{msg2}}</div>
+        <!-- 如果某些标签或者某些数据渲染在页面上之后,不再进行更新,v-once指令, 提高编译执行效率 
+            添加了v-once指令的标签,只有在页面初始化的渲染一次数据,之后数据更新,不会在页面中重新更新
+        -->
+        <div v-html="num" v-once></div>
+    </div>
+    <script src='./vue.js'></script>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "欢迎光临小可爱",
+                msg1: "<h1>欢迎光临小可爱</h1>",
+                msg2: "晚上好呀      小可爱",
+                num: 10
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

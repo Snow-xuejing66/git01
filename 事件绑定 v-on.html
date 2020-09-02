@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <!-- v-on:事件类型 = "业务逻辑 || 函数名" -->
+        <button v-on:click="doThis">按钮1</button>
+        <button v-on:mousemove="msg=456">按钮2</button>{{msg}}
+        <button v-on:click="alert('123')">按钮4</button>
+        <button>按钮5</button>
+    </div>
+    <script src='https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js'></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 123
+            },
+            methods: {
+                doThis() {
+                    alert("阿尼as诶呦")
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

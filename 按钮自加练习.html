@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        {{num}}
+
+        <button @click="add">按钮+1</button>
+        <button @click="add2(2,10)">按钮+10</button>
+        <button @click="add3">按钮+100</button>
+    </div>
+    <script src='https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js'></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 1
+            },
+            methods: {
+                add() {
+                    this.num++;
+                },
+                add2(param1, param2) {
+                    console.log(param1, param2);
+                    this.num += param2
+                },
+                add3(e) {
+                    var res = e.target.innerHTML;
+                    console.log(res);
+                    var reg = res.split("+");
+                    this.num += parseFloat(reg[1])
+                    console.log(this.num);
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
