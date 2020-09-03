@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .tab ul {
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tab ul li {
+            box-sizing: border-box;
+            padding: 0;
+            float: left;
+            width: 100px;
+            height: 45px;
+            line-height: 45px;
+            list-style: none;
+            text-align: center;
+            border-top: 1px solid blue;
+            border-right: 1px solid blue;
+            cursor: pointer;
+        }
+
+        .tab ul li:first-child {
+            border-left: 1px solid blue;
+        }
+
+        .tab ul li.active {
+            background-color: orange;
+        }
+
+        .tab div {
+            width: 500px;
+            height: 300px;
+            display: none;
+            text-align: center;
+            font-size: 30px;
+            line-height: 300px;
+            border: 1px solid blue;
+            border-top: 0px;
+        }
+
+        .tab div.current {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="tab">
+            <ul>
+                <!-- <li class="active">apple</li> -->
+                <li v-for="(items,index) in fruits">{{items.name}}</li>
+                <!-- <li>lemon</li> -->
+            </ul>
+            <!-- <div class="current">
+                <img src="img/apple.png">
+            </div> -->
+            <div><img :src="path"></div>
+            <!-- <div>
+                <img src="img/lemon.png">
+            </div> -->
+        </div>
+    </div>
+    <script type="text/javascript" src="./JS/vue.js"></script>
+    <script type="text/javascript">
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                fruits: [{
+                    id: 1,
+                    name: "apple",
+                    path: "./img/apple.png"
+                }, {
+                    id: 2,
+                    name: "orange",
+                    path: "./img/orange.png"
+                }, {
+                    id: 3,
+                    name: "lemon",
+                    path: "./img/lemon.png"
+                }]
+            },
+            methods: {}
+
+        });
+    </script>
+</body>
+
+</html>

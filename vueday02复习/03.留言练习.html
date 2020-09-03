@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        id：<input type="text" v-model="id"><br>
+        name：<input type="text" v-model="name">
+        <button @click="add">新增</button>
+        <hr>
+        <ul>
+            <li v-for="(items,index) in hybb" :key="items.id">{{items.name}}</li>
+        </ul>
+    </div>
+    <script src='./JS/vue.js'></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                id: "",
+                name: "",
+                hybb: [{
+                    id: 1,
+                    name: "傻不拉几"
+                }, {
+                    id: 2,
+                    name: "胖不拉几"
+                }, {
+                    id: 3,
+                    name: "穷不拉几"
+                }, {
+                    id: 4,
+                    name: "歪不拉几"
+                }]
+            },
+            methods: {
+                add() {
+                    this.hybb.unshift({ id: this.id, name: this.name })
+                    console.log(this.id);
+                    console.log(this.name);
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

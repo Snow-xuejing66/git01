@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <div v-for="(items,index) in arr" :key="items.id">{{items.name}}------------{{index}}</div>
+        <div v-for="(items,index) in 10" :key="items.id">{{items}}------------{{index+1}}</div>
+        <div v-for="(items,index) in 'abcdef'" :key="items.id">{{items}}------------{{index}}</div>
+    </div>
+    <script src='./JS/vue.js'></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                arr: [{
+                    id: 1,
+                    name: "小米",
+                    price: 2000
+                }, {
+                    id: 2,
+                    name: "华为",
+                    price: 3000
+                }, {
+                    id: 3,
+                    name: "魅族",
+                    price: 1000
+                }
+                ]
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

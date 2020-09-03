@@ -17,6 +17,7 @@
             <option value="/">/</option>
         </select>
         <input type="text" v-model="num2">
+        <div>计算的结果为:{{result}}</div>
     </div>
 </body>
 <script src="./vue.js"></script>
@@ -24,12 +25,15 @@
     new Vue({
         el: '#app',
         data: {
-            num1="",
-            num2="",
-            sep="+"
+            num1: "",
+            num2: "",
+            sep: "+",
+            result: ""
         },
         methods: {
+            if(sep== "+"){
 
+    }
         },
     })
 </script>
