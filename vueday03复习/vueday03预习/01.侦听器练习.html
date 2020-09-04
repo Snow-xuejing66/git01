@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <span>
+            姓:
+        </span>
+        <span>
+            <input type="text" v-model="fristName" />
+        </span>
+        <br>
+        <span>
+            名:
+        </span>
+        <span>
+            <input type="text" v-model="lastName" />
+        </span>
+        <br>
+        <h3>姓名为:{{fullName}}</h3>
+    </div>
+    <script src='./JS/vue.js'></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                fristName: "",
+                lastName: "",
+                // fullName: ""
+            },
+            methods: {},
+            computed: {
+                fullName: function () {
+                    return this.fristName + " " + this.lastName
+                }
+            }
+            // watch: {
+            //     fristName: function (val) {
+            //         this.fullName = val + " " + this.lastName
+            //     },
+            //     lastName: function (val) {
+            //         this.fullName = this.fristName + " " + val
+            //     }
+            // }
+        })
+    </script>
+</body>
+
+</html>

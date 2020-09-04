@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <span>用户名:</span>
+        <input type="text" v-model.lazy="uname">
+        <span>{{tip}}</span>
+    </div>
+    <script src='./JS/vue.js'></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                uname: "",
+                tip: ""
+            },
+            methods: {
+                watchUname: function (uname) {
+                    var that = this
+                    setTimeout(function () {
+                        if (uname == "admin") {
+                            return that.tip = "该用户已被注册"
+                        }
+                        that.tip = "亲亲，没有被注册那"
+
+                    }, 2000)
+                }
+            },
+            watch: {
+                uname: function (val) {
+                    this.watchUname(val);
+                    this.tip = "亲亲我正在努力加载呐..."
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
