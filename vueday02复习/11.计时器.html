@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <div v-gettime="obj"></div>
+    </div>
+    <script src='./JS/vue.js'></script>
+    <script>
+        Vue.directive("gettime", {
+            inserted(el, binding) {
+                console.log(el);
+                console.log(binding.value.time);
+                console.log(binding.value.nowTime);
+                if ((binding.value.nowTime - binding.value.time) <= 10000) {
+                    // alert("亲亲,刚刚才发的呐")
+                    el.innerHTML = "亲亲,刚刚才发的呐"
+                }
+                // alert("亲亲,已经过去10分钟哟")
+                el.innerHTML = "亲亲,已经过去10分钟哟"
+            }
+        })
+        new Vue({
+            el: '#app',
+            data: {
+                obj: {
+                    time: 1599130665722,
+                    nowTime: +new Date
+                }
+            },
+            methods: {
+
+            },
+        })
+    </script>
+</body>
+
+</html>
