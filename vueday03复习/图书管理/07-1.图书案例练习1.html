@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <style type="text/css">
+        .grid {
+            margin: auto;
+            width: 530px;
+            text-align: center;
+        }
+
+        .grid table {
+            border-top: 1px solid #c2d89a;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .grid th,
+        td {
+            padding: 10;
+            border: 1px dashed #f3dcab;
+            height: 35px;
+            line-height: 35px;
+        }
+
+        .grid th {
+            background-color: #f3dcab;
+        }
+
+        .grid .book {
+            padding-bottom: 10px;
+            padding-top: 5px;
+            background-color: #f3dcab;
+        }
+
+        .grid .total {
+            height: 30px;
+            line-height: 30px;
+            background-color: #f3dcab;
+            border-top: 1px solid #c2d89a;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="grid">
+            <div>
+                <h1>图书管理</h1>
+                <div class="book">
+                    <div>
+                        <label for="id"> 编号： </label>
+                        <input type="text" id="id" v-model='id' disabled />
+                        <label for="name"> 名称： </label>
+                        <input type="text" id="name" v-model='name' />
+                        <button @click="handler" :disabled="isSubmit">提交</button>
+                    </div>
+                </div>
+            </div>
+            <div class="total"><span>图书总数：</span> <span>{{books.length}}</span></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-model="books" v-for="item in books" :key="item.id">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.date | formDate('yyyy-MM-DD hh:mm:ss')}}</td>
+                        <td><a href="#" @click="toEoid(item.id)">修改</a> <span>|</span>
+                            <a href="#" @click.prevent="delData(item.id)">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="./JS/vue.js"></script>
+    <script>
+        Vue.filter("formDate", function (val, param) {
+            const date = new Date(val);
+            const y = date.getFullYear();
+            const M = String(date.getMonth() + 1).padStart(2, "0");
+            const D = String(date.getDate()).padStart(2, "0");
+            const h = String(date.getHours()).padStart(2, "0");
+            const m = String(date.getMinutes()).padStart(2, "0");
+            const s = String(date.getSeconds()).padStart(2, "0");
+            if (param == "yyyy-MM-DD hh:mm:ss") {
+                return `${y}-${M}-${D} ${h}:${m}:${s}`
+            }
+
+        })
+        new Vue({
+            el: "#app",
+            data: {
+                id: "",
+                name: "",
+                date: "",
+
+                // 渲染数据
+                books: [
+                    {
+                        id: 1,
+                        name: "三国演义",
+                        date: +new Date(),
+                    }, {
+                        id: 2,
+                        name: "水浒传",
+                        date: +new Date(),
+                    }, {
+                        id: 3,
+                        name: "红楼梦",
+                        date: +new Date()
+                    }, {
+                        id: 4,
+                        name: "西游记",
+                        date: +new Date()
+                    }
+                ],
+                isEdit: false,
+            },
+            methods: {
+                // 点击提交按钮，讲输入框中的名称编号添加到表单中
+                handler() {
+                    // 名称为空不能输入
+                    if (!this.name) return
+                    if (!this.isEdit) {
+                        this.books.push({
+                            // 编号自增
+                            id: this.books.length ? this.books[this.books.length - 1].id + 1 : 1,
+                            name: this.name,
+                            date: +new Date()
+                        })
+                    } else {
+                        this.books.some(item => {
+                            if (item.id == this.id) {
+                                item.name = this.name
+                            }
+                        })
+                        this.isEdit = false
+                    }
+
+                },
+                // 点击删除按钮删除对应的数据
+                delData(id) {
+                    console.log(id);
+                    const index = this.books.findIndex(item => item.id == id)
+                    this.books.splice(index, 1)
+                    // this.books.splice(id - 1, 1)
+                },
+                // 点击修改按钮input获取相应索引的表单名称数据
+                toEoid(id) {
+                    this.isEdit = true
+                    const res = this.books.filter(function (item) {
+                        return item.id == id
+                    })
+                    this.name = res[0].name;
+                    this.id = res[0].id;
+                },
+            },
+            // 监听事件 监听input框中输入的值与books中的name值是否一样,一样时，按钮无法点击
+            watch: {
+                name: function (value) {
+                    this.books.some((item) => {
+                        return item.name == value
+                        if (item.name == value) {
+                            this.isSubmit = true;
+                        } else {
+                            this.isSubmit = false;
+
+                        }
+                    })
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>
