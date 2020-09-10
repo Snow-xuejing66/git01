@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <button @click="del">删除</button>
+        <button @click="add">新增</button>
+        <button @click="emit">修改</button>
+        <li v-for="item in list" :key="item.id">{{item.name}}</li>
+    </div>
+    <script src="../mybook/public/js/axios.js"></script>
+    <script src="../mybook/public/js/vue.js"></script>
+    <script>
+        axios.defaults.baseURL = 'http://localhost:3000/';
+        new Vue({
+            el: '#app',
+            data: {
+                list: []
+            },
+            created() {
+                axios.get('fruits').then((res) => {
+                    console.log(res.data);
+                    this.list = res.data;
+                    console.log(this.list);
+
+                }
+                )
+            },
+            methods: {
+                // 删除数据
+                del() {
+                    axios.delete('fruits/2').then((res) => {
+                        console.log(res.data);
+                        this.list = res.data;
+                    })
+                },
+                // 新增数据
+                add() {
+                    axios.post('fruits', { name: '小苹果' }).then((res) => {
+                        console.log(res.data);
+                        this.list = res.data;
+                    })
+                },
+                // 修改数据
+                emit() {
+                    axios.put('fruits/4', { name: '草莓' }).then((res) => {
+                        console.log(res.data);
+                        this.list = res.data;
+                    })
+                }
+            },
+
+        })
+    </script>
+</body>
+
+</html>
