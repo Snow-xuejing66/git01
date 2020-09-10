@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- node中 后端路由  请求方式和请求的地址被服务器监听到之后, 数据库的增删改查操作,返回给前端数据 -->
+    <!-- 前端路由   -->
+
+    <!-- 1. 引入vue和vue-router
+         2. 创建组件 
+         3. 定义路由规则
+        -->
+
+    <div id="app">
+        <!-- a标签  to属性 相当于a标签 href属性 -->
+        <router-link to="/music">音乐</router-link>
+        <router-link to="/movie">电影</router-link>
+        <router-link to="/news">新闻</router-link>
+        <!-- 路由占位 可以简写为单标签 -->
+        <router-view />
+    </div>
+    <!-- 1.引入vue和vue-router -->
+    <script src="./js/vue_2.5.22.js"></script>
+    <script src="./js/vue-router.js"></script>
+    <script>
+        //  2. 创建组件
+        const music = {
+
+            // template: `<div>音乐列表</div>`,
+            template: `<div>音乐列表</div>`
+        };
+        const movie = {
+            template: `<div>电影列表</div>`,
+        };
+        const news = {
+            template: `<div>新闻列表 <button @click="go">跳转到音乐</button></div>`,
+            methods: {
+                go() {
+                    this.$router.push('/music')
+                }
+            }
+        };
+        const music = {
+            template: `<div>音乐列表<button @click="$router.push('/news/0')">跳转到新闻</button></div>`
+        }
+        //   3.创建路由规则,是一个数组
+        //   4.创建路由实例并挂载规则
+        const router = new VueRouter({
+            routes: [
+                // 路由重定向 ,如果打开的页面是空白 url 是 / ,默认指定跳转某个地址
+                { path: "/", redirect: "/news" },
+                // path是路径 表示的是路由地址
+                { path: "/music", component: music, },
+                { path: "/movie", component: movie },
+                { path: "/news", component: news }
+            ],
+        });
+        new Vue({
+            el: "#app",
+            data: {},
+            // 5将路由实例 挂载给 vue实例
+            // router: router
+            router,
+        });
+    </script>
+</body>
+
+</html>
