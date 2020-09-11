@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <router-link to='/music?id=10&abc=100'>音乐</router-link>
+        <router-link to='/movie'>电影</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script src='https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js'></script>
+    <script src="../js/vue-router.js"></script>
+    <script>
+        // query获取的是?后面的字符串   params获取的是/后面的字符串
+        const music = {
+            props: ["id", "abc"],
+            template: `<div>音乐列表{{id}}------{{abc}}</div>`
+        };
+        const movie = {
+            template: `<div>电影列表</div>`
+        }
+        const router = new VueRouter({
+            routes: [{
+                path: '/',
+                redirect: '/music',
+
+            }, {
+                path: '/music',
+                component: music,
+                props: true
+            }, {
+                path: '/movie',
+                component: movie
+            }]
+        })
+        new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router: router
+        })
+    </script>
+</body>
+
+</html>

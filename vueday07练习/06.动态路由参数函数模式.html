@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 1. 引入vue和vue-router
+         2. 创建组件 
+         3. 定义路由规则
+        -->
+
+    <div id='app'>
+        <router-link to="/music">音乐</router-link>
+        <router-link to="/movie">电影</router-link>
+        <!-- 占位符 -->
+        <router-view></router-view>
+
+    </div>
+    <script src='https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js'></script>
+    <script src="../js/vue-router.js"></script>
+    <script>
+        const music = {
+            props: ['name', 'sex'],
+            template: `<div>音乐列表====={{name}}====={{sex}}</div>`
+        };
+        const movie = {
+            template: `<div>电影列表</div>`
+        }
+        const router = new VueRouter({
+            routes: [
+                { path: '/', redirect: '/music' },
+                {
+                    path: '/music',
+                    component: music,
+                    props: function (router) {
+                        const name = 'zs';
+                        const sex = 'womem';
+                        return { name, sex };
+                    }
+                },
+                { path: '/movie', component: movie }
+            ]
+        });
+        new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router: router
+        })
+    </script>
+</body>
+
+</html>
